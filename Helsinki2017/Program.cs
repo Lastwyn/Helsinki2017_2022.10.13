@@ -28,7 +28,7 @@ namespace Helsinki2017
                     sum += double.Parse(adatpont.rovidprogram[2, i], CultureInfo.InvariantCulture) + double.Parse(adatpont.rovidprogram[3, i], CultureInfo.InvariantCulture) - double.Parse(adatpont.rovidprogram[4, i], CultureInfo.InvariantCulture);
                 }
             }
-            //5-6. feladat
+            //5.-6. feladat
             Console.WriteLine("6. feladat");
             if (sum !=0 )
             {
@@ -38,6 +38,7 @@ namespace Helsinki2017
             {
                 Console.WriteLine("\tNincs ilyen versenyző.");
             }
+            
         }
         static class adatpont {
             public static string[,] rovidprogram;
@@ -91,18 +92,68 @@ namespace Helsinki2017
             else {
                 Console.WriteLine("\tA magyar versenyző nem jutott be a kűrbe.");
             }
-            //5-6. feladat
+            //5.-6. feladat
             Console.WriteLine("5. feladat");
-            Console.WriteLine("\tKérem a versenyző nevét:");
+            Console.Write("\tKérem a versenyző nevét: ");
             
             Összpontszám(Console.ReadLine());
             //7. feladat
+            Console.WriteLine("7. feladat");
             List<string> orszag = new List<string>();
-            for (int i = 0; i < ; i++)
+            for (int i = 0; i < adatpont.rovidprogram.GetLength(1); i++)
             {
-
+                bool vane = false;
+                for (int j = 0; j < orszag.Count; j++)
+                {
+                    if (adatpont.rovidprogram[1, i] == orszag[j])
+                    {
+                        vane = true;
+                    }
+                }
+                if (vane == false)
+                {
+                    orszag.Add(adatpont.rovidprogram[1,i]);
+                }
             }
 
+            int[] orszag2 = new int[orszag.Count];
+            for (int i = 0; i < adatpont.donto.GetLength(1); i++)
+            {
+                for (int j = 0; j < orszag.Count; j++)
+                {
+                    if (adatpont.donto[1,i] == orszag[j])
+                    {
+                        orszag2[j]++;
+                    }
+                }
+            }
+            for (int i = 1; i < orszag2.Length; i++)
+            {
+                if (orszag2[i] > 0)
+                {
+                    Console.WriteLine($"\t{orszag[i]} : {orszag2[i]} versenyzo");
+                }
+            }
+            //8. feladat
+            Console.WriteLine("8. feladat: Kiiratás.");
+            
+            string[,] kiirat = new string[3, adatpont.donto.Length];
+            for (int i = 0; i < adatpont.donto.GetLength(1); i++)
+            {
+                kiirat[0, i] = adatpont.donto[0, i];
+                kiirat[1, i] = adatpont.donto[1, i];
+                kiirat[2, i] = Convert.ToString(double.Parse(adatpont.donto[2, i], CultureInfo.InvariantCulture) + double.Parse(adatpont.donto[3, i], CultureInfo.InvariantCulture) - double.Parse(adatpont.donto[4, i], CultureInfo.InvariantCulture));
+
+            }
+            StreamWriter kiiratas = new StreamWriter("vegeredmeny.csv");
+            for (int i = 0; i < kiirat.GetLength(1); i++)
+            {
+                for (int j = 0; j < kiirat.GetLength(0); j++)
+                {
+                    kiiratas.Write(kiirat[j,i]);
+                }
+                kiiratas.WriteLine();
+            }
             Console.ReadKey();          
         }
 
