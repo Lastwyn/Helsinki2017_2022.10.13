@@ -135,7 +135,7 @@ namespace Helsinki2017
                 }
             }
             //8. feladat
-            Console.WriteLine("8. feladat: Kiiratás.");
+       /*     Console.WriteLine("8. feladat: Kiiratás.");
             
             string[,] kiirat = new string[3, adatpont.donto.Length];
             for (int i = 0; i < adatpont.donto.GetLength(1); i++)
@@ -153,7 +153,7 @@ namespace Helsinki2017
                     kiiratas.Write(kiirat[j,i]);
                 }
                 kiiratas.WriteLine();
-            }
+            }*/
             Console.ReadKey();          
         }
 
